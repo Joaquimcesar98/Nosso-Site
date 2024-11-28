@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso amor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #2c003e, #120023);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 20px 0;
+            color: #e0b3ff;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #ffccf9;
+        }
+        .section {
+            background-color: #1a002e;
+            border: 2px solid #6a0dad;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+        .countdown div {
+            text-align: center;
+        }
+        .countdown div span {
+            display: block;
+            font-size: 1.8rem;
+            color: #e0b3ff;
+        }
+        .text-box {
+            background-color: #3e005c;
+            border: 2px solid #ff99e6;
+            border-radius: 15px;
+            padding: 20px;
+            color: #ffccf9;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        .text-box img {
+            max-width: 100%;
+            border-radius: 15px;
+            border: 2px solid #ff66cc;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .text-box h2 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            color: #ff66cc;
+        }
+        audio {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Nosso amor 💜</h1>
+
+    <!-- Contagem do tempo juntos -->
+    <div class="section">
+        <h2>Estamos juntos há:</h2>
+        <p id="together" class="timer">Calculando...</p>
+    </div>
+
+    <!-- Contagem regressiva para o próximo aniversário -->
+    <div class="section">
+        <h2>Próximo aniversário:</h2>
+        <div class="countdown">
+            <div>
+                <span id="days">0</span> Dias
+            </div>
+            <div>
+                <span id="hours">0</span> Horas
+            </div>
+            <div>
+                <span id="minutes">0</span> Minutos
+            </div>
+            <div>
+                <span id="seconds">0</span> Segundos
+            </div>
+        </div>
+    </div>
+
+    <!-- Título e texto estilizado com imagem -->
+    <div class="text-box">
+        <img src="minha-namorada.jpg" alt="Minha Namorada">
+        <h2>Minha Querida</h2>
+        <p>
+            Oi, amor. Eu sei que a vida tem seus altos e baixos, mas saiba que você é a luz que ilumina os meus dias. 
+            Mesmo nos momentos difíceis, eu sei que juntos somos mais fortes e sempre teremos dias melhores pela frente. 
+            Você é incrível e merece todo o amor e felicidade do mundo. Obrigado por ser você. 💜
+        </p>
+    </div>
+
+    <!-- Música -->
+    <audio autoplay loop>
+        <source src="golden-hour.mp3" type="audio/mpeg">
+        Seu navegador não suporta a reprodução de áudio.
+    </audio>
+
+    <script>
+        // Configuração da data inicial
+        const startDate = new Date('2022-12-11T00:00:00');
+
+        // Atualizar tempo juntos
+        function updateTogether() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+
+            document.getElementById('together').textContent = 
+                `${years} anos, ${months} meses e ${days} dias de amor. 💖`;
+        }
+
+        // Configuração da contagem regressiva (aniversário)
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let nextAnniversary = new Date(`${currentYear}-12-11T00:00:00`);
+
+            // Se já passou a data, use o próximo ano
+            if (now > nextAnniversary) {
+                nextAnniversary = new Date(`${currentYear + 1}-12-11T00:00:00`);
+            }
+
+            const diff = nextAnniversary - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Atualizações em tempo real
+        updateTogether();
+        updateCountdown();
+        setInterval(updateTogether, 60000); // Atualiza o tempo juntos a cada minuto
+        setInterval(updateCountdown, 1000); // Atualiza a contagem regressiva a cada segundo
+    </script>
+</body>
+</html>
