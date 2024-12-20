@@ -95,6 +95,28 @@
         audio {
             margin-top: 20px;
         }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            border: 2px solid #ff99e6;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.2);
+        }
+        #randomQuote {
+            font-size: 1.5rem;
+            color: #ffccf9;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -139,16 +161,32 @@
         </p>
     </div>
 
+    <!-- Frases de Amor Aleatórias -->
+    <div class="section">
+        <h2>Frases de Amor</h2>
+        <p id="randomQuote">Clique no botão para ler uma frase especial! 💌</p>
+        <button onclick="generateQuote()">Surpreenda-me</button>
+    </div>
+
+    <!-- Galeria de Memórias -->
+    <div class="section">
+        <h2>Nossas Memórias</h2>
+        <div class="gallery">
+            <img src="foto1.jpg" alt="Memória 1" title="Um dia inesquecível!">
+            <img src="foto2.jpg" alt="Memória 2" title="Nosso lugar especial.">
+            <img src="foto3.jpg" alt="Memória 3" title="Mais uma aventura juntos.">
+        </div>
+    </div>
+
     <!-- Música -->
     <audio autoplay loop>
-        <source src ="golden-hour.mp3" type="audio/mpeg">
+        <source src="golden-hour.mp3" type="audio/mpeg">
+        Seu navegador não suporta a reprodução de áudio.
     </audio>
 
     <script>
-        // Configuração da data inicial
         const startDate = new Date('2022-12-11T00:00:00');
 
-        // Atualizar tempo juntos
         function updateTogether() {
             const now = new Date();
             const diff = now - startDate;
@@ -161,13 +199,11 @@
                 `${years} anos, ${months} meses e ${days} dias de amor. 💖`;
         }
 
-        // Configuração da contagem regressiva (aniversário)
         function updateCountdown() {
             const now = new Date();
             const currentYear = now.getFullYear();
             let nextAnniversary = new Date(`${currentYear}-12-11T00:00:00`);
 
-            // Se já passou a data, use o próximo ano
             if (now > nextAnniversary) {
                 nextAnniversary = new Date(`${currentYear + 1}-12-11T00:00:00`);
             }
@@ -185,11 +221,22 @@
             document.getElementById('seconds').textContent = seconds;
         }
 
-        // Atualizações em tempo real
+        const quotes = [
+            "O amor não se vê com os olhos, mas com o coração. 💖",
+            "Você é a razão do meu sorriso todos os dias. 😊",
+            "Juntos somos invencíveis e imensamente felizes. 💕",
+            "Cada momento com você é um pedaço do paraíso. 🌟",
+            "Se eu pudesse, te daria todas as estrelas do universo. 🌌"
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('randomQuote').textContent = quotes[randomIndex];
+        }
+
+        // Atualizações periódicas
+        setInterval(updateCountdown, 1000);
         updateTogether();
-        updateCountdown();
-        setInterval(updateTogether, 60000); // Atualiza o tempo juntos a cada minuto
-        setInterval(updateCountdown, 1000); // Atualiza a contagem regressiva a cada segundo
     </script>
 </body>
-</html>
+    </html>
